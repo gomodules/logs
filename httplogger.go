@@ -2,6 +2,7 @@ package logs
 
 import (
 	"bytes"
+
 	"k8s.io/klog/v2"
 )
 
