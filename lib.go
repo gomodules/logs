@@ -85,6 +85,10 @@ func Init(rootCmd *cobra.Command, printFlags bool) {
 				flags.PrintFlags(fs)
 			}
 			flags.LoggerOptions = flags.GetOptions(fs)
+			var klogLevel klog.Level
+			if err := klogLevel.Set(flags.LoggerOptions.Verbosity); err != nil {
+				klog.Errorf("Failed to set klog verbosity level from flags.LoggerOptions: %v", err)
+			}
 			return fn(cmd, args)
 		}
 	} else if fn := rootCmd.PersistentPreRun; fn != nil {
@@ -94,6 +98,10 @@ func Init(rootCmd *cobra.Command, printFlags bool) {
 				flags.PrintFlags(fs)
 			}
 			flags.LoggerOptions = flags.GetOptions(fs)
+			var klogLevel klog.Level
+			if err := klogLevel.Set(flags.LoggerOptions.Verbosity); err != nil {
+				klog.Errorf("Failed to set klog verbosity level from flags.LoggerOptions: %v", err)
+			}
 			fn(cmd, args)
 		}
 	} else {
@@ -103,6 +111,10 @@ func Init(rootCmd *cobra.Command, printFlags bool) {
 				flags.PrintFlags(fs)
 			}
 			flags.LoggerOptions = flags.GetOptions(fs)
+			var klogLevel klog.Level
+			if err := klogLevel.Set(flags.LoggerOptions.Verbosity); err != nil {
+				klog.Errorf("Failed to set klog verbosity level from flags.LoggerOptions: %v", err)
+			}
 		}
 	}
 }
