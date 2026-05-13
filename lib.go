@@ -84,6 +84,10 @@ func Init(rootCmd *cobra.Command, printFlags bool) {
 			if printFlags {
 				flags.PrintFlags(fs)
 			}
+			var klogLevel klog.Level
+			if err := klogLevel.Set(flags.LoggerOptions.Verbosity); err != nil {
+				klog.Errorf("Failed to set klog verbosity level from flags.LoggerOptions: %v", err)
+			}
 			flags.LoggerOptions = flags.GetOptions(fs)
 			return fn(cmd, args)
 		}
